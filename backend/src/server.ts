@@ -6,6 +6,7 @@ import passport from "./config/passport";
 import authRoutes from "./routes/authRoutes";
 import cookieParser from "cookie-parser";
 import skillRoutes from "./routes/skillRoutes";
+import taskRoutes from "./routes/taskRoutes";
 
 dotenv.config();
 const app = express();
@@ -40,6 +41,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes); 
 app.use("/api/skills", skillRoutes); 
+app.use("/api/tasks", taskRoutes);
 
 app.get("/", (_, res) => res.send("API is running 🚀"));
 

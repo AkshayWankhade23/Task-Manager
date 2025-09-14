@@ -12,6 +12,29 @@ enum Role {
   admin
 }
 
+enum Priority {
+  high
+  medium
+  low
+  no_priority
+}
+
+enum ReminderType {
+  on_time
+  custom
+}
+
+enum RepeatType {
+  none
+  daily
+  weekly
+  monthly
+  yearly
+  weekdays
+  weekends
+  custom
+}
+
 model User {
   id            String   @id @default(uuid())
   name          String
@@ -27,6 +50,7 @@ model User {
   // 👇 Relations
   skills   Skill[]
   roadmaps Roadmap[]
+  tasks    Task[]
 
   @@index([email])
 }
@@ -49,4 +73,30 @@ model Roadmap {
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Task {
+  id                 String      @id @default(uuid())
+  taskName           String
+  priority           Priority    @default(no_priority)
+  date               DateTime
+  time               String
+  reminder           ReminderType @default(on_time)
+  reminderTimeUnit   String?
+  reminderCustomDays Int?
+  reminderCustomWeeks Int?
+  reminderCustomTime String?
+  repeat             RepeatType  @default(none)
+  repeatType         String?
+  repeatFrequency    String?
+  repeatCount        Int?
+  skipWeekends      Boolean?    @default(false)
+  completed         Boolean     @default(false)
+  userId            String
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
