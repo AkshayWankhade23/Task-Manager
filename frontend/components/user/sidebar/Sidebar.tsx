@@ -40,10 +40,10 @@ const userNavItems: NavItem[] = [
     activeMatch: "/user/projects",
   },
   {
-    title: "Roadmaps",
-    href: "/user/roadmaps",
+    title: "Daily Tasks",
+    href: "/user/daily-tasks",
     icon: BookOpen,
-    activeMatch: "/user/roadmaps",
+    activeMatch: "/user/daily-tasks",
   },
   {
     title: "Learning",
